@@ -62,15 +62,23 @@ public class ShiroConfiguration {
 		// 拦截器.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 		// 设置login URL
-		shiroFilterFactoryBean.setLoginUrl("/login");
+		shiroFilterFactoryBean.setLoginUrl("/login.html");
 		// 登录成功后要跳转的链接
-		//shiroFilterFactoryBean.setSuccessUrl("/login/index");
+		// shiroFilterFactoryBean.setSuccessUrl("/login/index");
 		// 未授权的页面
 		// shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized.action");
 		// src="jquery/jquery-3.2.1.min.js" 生效
-		filterChainDefinitionMap.put("/jquery/*", "anon");
+		
+		filterChainDefinitionMap.put("/public/**", "anon");
+		filterChainDefinitionMap.put("/resource/**", "anon");
+		filterChainDefinitionMap.put("/static/**", "anon");
+		filterChainDefinitionMap.put("/gt.js", "anon");
+		filterChainDefinitionMap.put("/index.html", "anon");
+		
+		
 		// 设置登录的URL为匿名访问，因为一开始没有用户验证
-		filterChainDefinitionMap.put("/login/*", "anon");
+		filterChainDefinitionMap.put("/login/**", "anon");
+		filterChainDefinitionMap.put("/logina.html", "anon");
 
 		filterChainDefinitionMap.put("/Exception.class", "anon");
 		// 我写的url一般都是xxx.action，根据你的情况自己修改

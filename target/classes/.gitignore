@@ -1,2 +1,7 @@
 /META-INF/
+/application.yml
 /cn/
+/ehcache.xml
+/mapper/
+/static/
+/snippet/
