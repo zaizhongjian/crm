@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>首页</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="css/public.css" media="all" />
+	<link rel="stylesheet" href="css/main.css" media="all" />
+</head>
+<body class="childrenBody">
+<blockquote class="layui-elem-quote layui-bg-green" style="display: none;">
+	<div id="nowTime"></div>
+</blockquote>
+	<!--首页显示用户信息-->
+	<div class="main">
+		<div class="panel_box row">
+			<div class="panel col">
+				<a href="javascript:;" data-url="user/message.html">
+					<div class="panel_icon">
+						<i class="layui-icon" data-icon="&#xe63a;">&#xe63a;</i>
+					</div>
+					<div class="panel_word newMessage">
+						<span>3</span>
+						<cite>新消息</cite>
+					</div>
+				</a>
+			</div>
+			<div class="panel col">
+				<a href="javascript:;" data-url="user/indent/addAddress.html">
+					<div class="panel_icon" style="background-color:#FF5722;">
+						<i class="layui-icon" data-icon="&#xe61f;">&#xe61f;</i>
+					</div>
+					<div class="panel_word userAll">
+						<span class="address_val">12</span>
+						<cite>新增地址</cite>
+					</div>
+				</a>
+			</div>
+			<div class="panel col">
+				<a href="javascript:;" data-url="user/indent/appointment.html">
+					<div class="panel_icon" style="background-color:#009688;">
+						<i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i>
+					</div>
+					<div class="panel_word userAll">
+						<span class="orders_val">30</span>
+						<cite>所有订单</cite>
+					</div>
+				</a>
+			</div>
+			<div class="panel col">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#5FB878;">
+						<i class="layui-icon" data-icon="&#xe857;">&#xe857;</i>
+					</div>
+					<div class="panel_word imgAll">
+						<span class="loginTime" id="loginTime" style="font-size: 13px;"></span>
+						<cite>上次登录时间</cite>
+					</div>
+				</a>
+			</div>
+			<div class="panel col">
+				<a href="javascript:;">
+					<div class="panel_icon" style="background-color:#f39538;">
+						<i class="layui-icon" data-icon="&#xe715;">&#xe715;</i>
+					</div>
+					<div class="panel_word imgAll" style="margin-top: 8px;">
+						<span class="logAddress" id="logAddress" style="font-size: 13px;color: #1e9fff;"></span>
+						<p style="font-size: 11px;color: #bf6666;" class="yidi_login"></p>
+						<cite>上次登录地址</cite>
+					</div>
+				</a>
+			</div>
+		</div>
+		<hr/>
+		<br/>
+		<!--账户余额-->
+		<div class=" main_balance layui-row">
+			<div class="layui-col-md5">
+				<table class="layui-table main_balance_table">
+					<colgroup>
+						<col width="150">
+						<col width="200">
+						<col>
+					</colgroup>
+					<tr>
+						<td style="text-align: right;">
+							<i class="layui-icon layui-icon-rmb" style="font-size: 50px; color: red;"></i>
+						</td>
+						<td style="padding: 0;">
+							<p class="balance_p">账户余额</p>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<span class="balanceVal" style=" color: red; font-size: 25px;">10.00</span>
+							<span>RMB</span>
+						</td>
+						<td style="text-align: right;">
+							<div class="card">
+								<a href="javascript:;" data-url="user/finance/selfhelp.html" class="layui-btn layui-btn-danger btn-lg" id="main_rechargeBtn"><i class="layui-icon">&#xe65e;</i><cite>自助充值</cite></a>
+							</div>
+						</td>
+						<td>
+							<div class="card">
+								<a href="javascript:;" data-url="user/finance/financedetail.html"  style="border-bottom: 1px solid #968e8e;font-size: 12px;cursor: pointer;"><cite>财务明细</cite></a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br/>
+		<!--仓库选择-->
+		<div class="main_warehouse layui-row" style="">
+			<div class="" style="width: 100%;">
+				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+					<ul class="layui-tab-title stor_ul">
+						<li class="layui-this storage_li"></li>
+					</ul>
+					<div class="layui-tab-content" id="sto_content">
+						<div class="layui-tab-item layui-show layui-row">
+							<table class="layui-col-xs6 layui-table main_tab1" id="main_tab1">
+								<colgroup>
+									<col width="150">
+									<col width="200">
+									<col>
+								</colgroup>
+							</table>
+							<table class="layui-col-xs6 layui-table main_tab2" style="" id="main_tab2">
+								<colgroup>
+									<col width="150">
+									<col width="200">
+									<col>
+								</colgroup>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<div class="main_prompt" style="">
+			<blockquote class="layui-elem-quote explain">
+				<p>温馨提示：以上的名称是通过用户完善个人信息自动生成的，是用户唯一的系统标识名称，请在填写的时候规范化填写，谢谢配合！</p>
+			</blockquote>
+		</div>
+		<br/>
+		<br/>
+		<!--卡片面板提示-->
+		<div class="main_panel" style="">
+			<div style="padding: 20px; background-color: #F2F2F2;">
+				<div class="layui-row layui-col-space15">
+					<div class="layui-col-md4">
+						<div class="layui-card card">
+							<div class="layui-card-header">账户安全&nbsp;<span class="layui-badge-dot"></span></div>
+							<div class="layui-card-body">
+								请务必定期修改密码，以保证账户安全！<br>
+								<a href="javascript:;" data-url="user/user/changePwd.html"><cite>修改密码</cite></a>>>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-md4">
+						<div class="layui-card card">
+							<div class="layui-card-header">地址管理&nbsp;<span class="layui-badge-dot"></span></div>
+							<div class="layui-card-body">
+								请填写完整的收货地址，以方便为您入库！<br>
+								<a href="javascript:;" data-url="user/indent/address.html"><cite>地址管理</cite></a>>>
+							</div>
+						</div>
+					</div>
+					<div class="layui-col-md4">
+						<div class="layui-card card">
+							<div class="layui-card-header">投诉与建议&nbsp;<span class="layui-badge-dot"></span></div>
+							<div class="layui-card-body">
+								如果你有任何的意见或建议，欢迎留言~ <br/>
+								<a href="javascript:;" data-url="user/complaints.html"><cite>我要留言</cite></a>>>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript" src="layui/layui.js"></script>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script>
+		//获取系统时间
+		var newDate = '';
+		getLangDate();
+		//值小于10时，在前面补0
+		function dateFilter(date){
+			if(date < 10){return "0"+date;}
+			return date;
+		}
+		function getLangDate(){
+			var dateObj = new Date(); //表示当前系统时间的Date对象
+			var year = dateObj.getFullYear(); //当前系统时间的完整年份值
+			var month = dateObj.getMonth()+1; //当前系统时间的月份值
+			var date = dateObj.getDate(); //当前系统时间的月份中的日
+			var day = dateObj.getDay(); //当前系统时间中的星期值
+			var weeks = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+			var week = weeks[day]; //根据星期值，从数组中获取对应的星期字符串
+			var hour = dateObj.getHours(); //当前系统时间的小时值
+			var minute = dateObj.getMinutes(); //当前系统时间的分钟值
+			var second = dateObj.getSeconds(); //当前系统时间的秒钟值
+			var timeValue = "" +((hour >= 12) ? (hour >= 18) ? "晚上" : "下午" : "上午" ); //当前时间属于上午、晚上还是下午
+			newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 "+" "+dateFilter(hour)+":"+dateFilter(minute)+":"+dateFilter(second);
+//			document.getElementById("nowTime").innerHTML = "亲爱的管理员用户，"+timeValue+"好！ 欢迎来到万达美电子商务转运平台，当前时间为： "+newDate+"　"+week;
+			setTimeout("getLangDate()",1000);
+		}
+
+		//上次登录时间
+		//$(".loginTime").html(newDate.split("日")[0]+"日</br>"+newDate.split("日")[1]);
+//**************************************************************************************************************************
+		layui.use(['form','layer','laydate','table','laytpl','element'],function() {
+			var form = layui.form,
+				layer = parent.layer === undefined ? layui.layer : top.layer,
+				$ = layui.jquery,
+				laydate = layui.laydate,
+				laytpl = layui.laytpl,
+				table = layui.table,
+				element = layui.element;
+			//main页面 调用菜单响应出异地登陆及上次登陆时间
+			$(function(){
+				var src;
+				$.ajax({
+					url: "../menu",
+					type: "get",
+					dataType: "json",
+					success:function(data){
+						if(data.code==0){
+							if(data.data.user.diffarealogin=="n"){
+								src="异地登陆";
+							}else if(data.data.user.diffarealogin=="y"){
+								src="非异地登陆";
+							}else{
+								src="系统错误";
+							}
+							$('#loginTime').html(data.data.user.lastlogintime);
+							$('#logAddress').html(data.data.user.lastloginip);
+							$('.address_val').html(data.data.totalAccountSite);
+							$('.orders_val').html(data.data.totalOrders);
+							$('.yidi_login').html(src);
+						}
+					}
+				});
+
+				//账户余额解析
+				$.ajax({
+					url: "../account/getBalance",
+					type: "get",
+					dataType: "json",
+					success:function(data){
+						if(data.code==0){
+							//响应成功
+							$('.balanceVal').html(data.data.surpluspice+'.00');
+						}
+						if(data.code==-1){
+							layer.msg("登录超时",function(){
+								window.location.href="../login.html";
+							});
+						}
+						if(data.code==1){
+							//layer.msg(data.msg);
+						}
+					}
+				});
+
+
+				//解析物流仓储表格
+				var sec_li='';
+				var sec='';
+				$.ajax({
+					url: "../cify",
+					type: "get",
+					dataType: "json",
+					success: function(data){
+						if(data.code==0){
+							$.each(data.data,function(index,sprot){
+								sec_li+='<li class="layui-this storage_li">'+sprot.name+'</li>';
+								sec+='<div class="layui-tab-item"><table class="layui-col-xs6 layui-table main_tab1"><colgroup><col width="150"><col width="200"><col></colgroup><tr><td>仓库名称/Name:</td><td class="td_color">'+sprot.name+'</td></tr><tr><td>电话/Telephone:</td><td class="td_color">'+sprot.phone+'</td></tr><tr><td>寄件人/name:</td><td class="td_color">'+sprot.key+'</td></tr><tr><td>地址/Address 1:</td><td class="td_color">'+sprot.address+'</td></tr></table><table class="layui-col-xs6 layui-table main_tab2"><colgroup><col width="150"><col width="200"><col></colgroup><tr><td>城市/City:</td><td class="td_color">'+sprot.city+'</td></tr><tr><td>国家/Country:</td><td class="td_color">'+sprot.country+'</td></tr><tr><td>邮编/PostCode:</td><td class="td_color">'+sprot.postcode+'</td></tr><tr><td>地址/Address 2:</td><td class="td_color">'+sprot.address2+'</td></tr></table></div>';
+							});
+							$('.stor_ul').html(sec_li);
+							$('#sto_content').html(sec);
+							$(".stor_ul li").first().click();
+						}
+						if(data.code==-1){
+							layer.msg("登录超时",function(){
+								window.location.href="../../login.html";
+							});
+						}
+						if(data.code==1){
+							//layer.msg(data.msg);
+						}
+					}
+				});
+			});
+
+
+		});
+</script>
+</body>
+</html>
