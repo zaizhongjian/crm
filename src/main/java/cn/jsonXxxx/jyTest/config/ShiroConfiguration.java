@@ -25,6 +25,12 @@ public class ShiroConfiguration {
 		return new LifecycleBeanPostProcessor();
 	}
 
+	/**
+	 * 自定义realm
+	 *
+	 * @return
+	 */
+
 	@Bean
 	public UserRealm myShiroRealm() {
 		UserRealm myShiroRealm = new UserRealm();
@@ -38,6 +44,12 @@ public class ShiroConfiguration {
 		return myShiroRealm;
 	}
 
+	/**
+	 * 安全管理器 注：使用shiro-spring-boot-starter
+	 * 1.4时，返回类型是SecurityManager会报错，直接引用shiro-spring则不报错
+	 *
+	 * @return
+	 */
 	@Bean
 	public SecurityManager securityManager() {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -46,6 +58,12 @@ public class ShiroConfiguration {
 		return securityManager;
 	}
 
+	/**
+	 * 设置过滤规则
+	 *
+	 * @param securityManager
+	 * @return
+	 */
 	@Bean
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 		// ShiroFilterFactoryBean shiroFilterFactoryBean = new
@@ -63,37 +81,26 @@ public class ShiroConfiguration {
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 		// 设置login URL
 		shiroFilterFactoryBean.setLoginUrl("/login.html");
-		// 登录成功后要跳转的链接
-		// shiroFilterFactoryBean.setSuccessUrl("/login/index");
-		// 未授权的页面
-		// shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized.action");
-		// src="jquery/jquery-3.2.1.min.js" 生效
-		
-		filterChainDefinitionMap.put("/public/**", "anon");
-		filterChainDefinitionMap.put("/resource/**", "anon");
-		filterChainDefinitionMap.put("/static/**", "anon");
-		filterChainDefinitionMap.put("/gt.js", "anon");
-		filterChainDefinitionMap.put("/index.html", "anon");
-		
-		
-		// 设置登录的URL为匿名访问，因为一开始没有用户验证
 		filterChainDefinitionMap.put("/login/**", "anon");
-		filterChainDefinitionMap.put("/logina.html", "anon");
+		filterChainDefinitionMap.put("/public/**", "anon");
+		// filterChainDefinitionMap.put("/resource/**", "anon");
+		filterChainDefinitionMap.put("/static/**", "anon");
 
+		// 设置登录的URL为匿名访问，因为一开始没有用户验证
 		filterChainDefinitionMap.put("/Exception.class", "anon");
 		// 我写的url一般都是xxx.action，根据你的情况自己修改
 		// filterChainDefinitionMap.put("/*.action", "authc");
 		// 退出系统的过滤器
 		filterChainDefinitionMap.put("/logout", "logout");
-		// 现在资源的角色
-		// filterChainDefinitionMap.put("/admin.html", "roles[admin]");
-		// filterChainDefinitionMap.put("/user.html", "roles[user]");
 		// 最后一班都，固定格式
-		filterChainDefinitionMap.put("/**", "authc");
+		filterChainDefinitionMap.put("/**/**", "authc");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}
 
+	/**
+	 * 开启shiro aop注解支持 使用代理方式;所以需要开启代码支持;
+	 */
 	@Bean
 	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
 		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
@@ -101,6 +108,9 @@ public class ShiroConfiguration {
 		return authorizationAttributeSourceAdvisor;
 	}
 
+	/**
+	 * DefaultAdvisorAutoProxyCreator，Spring的一个bean，由Advisor决定对哪些类的方法进行AOP代理。
+	 */
 	@Bean
 	public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
 		DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
@@ -109,6 +119,11 @@ public class ShiroConfiguration {
 		return advisorAutoProxyCreator;
 	}
 
+	/**
+	 * 凭证匹配器
+	 *
+	 * @return
+	 */
 	@Bean
 	public HashedCredentialsMatcher hashedCredentialsMatcher() {
 		HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
@@ -117,6 +132,10 @@ public class ShiroConfiguration {
 		return hashedCredentialsMatcher;
 	}
 
+	/*
+	 * shiro缓存管理器;
+	 * 需要注入对应的其它的实体类中-->安全管理器：securityManager可见securityManager是整个shiro的核心；
+	 */
 	@Bean
 	public EhCacheManager ehCacheManager() {
 		CacheManager cacheManager = CacheManager.getCacheManager("myEhcache");

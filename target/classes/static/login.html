@@ -15,12 +15,7 @@
 <script src="gt.js"></script>
 <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
 <script src="./lib/layui/jquery.js"></script>
-<link href="css/style.css" rel='stylesheet' type='text/css' />
 <!--webfonts-->
-<link
-	href='http://fonts.useso.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700'
-	rel='stylesheet' type='text/css'>
-<link href='http://fonts.useso.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
 <script src="gt.js"></script>
 </head>
 <body class="login-bg">
@@ -29,27 +24,27 @@
 		<div id="darkbannerwrap"></div>
 
 		<form method="post" class="layui-form">
-			<input name="username" placeholder="用户名" type="text"
-				lay-verify="required" class="layui-input">
-			<hr class="hr15">
-
-			<input name="password" lay-verify="required" placeholder="密码"
-				type="password" class="layui-input">
-			<hr class="hr15">
-			<hr class="hr15">
 			<div>
+				<label for="username2">用户名：</label> <input class="inp"
+					id="username2" type="text" value="admin">
+			</div>
+			<br>
+			<div>
+				<label for="password2">密码：</label> <input class="inp" id="password2"
+					type="password" value="admin">
+			</div>
+			<br>
+			<div>
+				<label>完成验证：</label>
 				<div id="captcha2">
 					<p id="wait2" class="show">正在加载验证码......</p>
 				</div>
 			</div>
 			<br>
 			<p id="notice2" class="hide">请先完成验证</p>
-			<hr class="hr20">
-			<input class="loginin" value="登录" lay-submit lay-filter="login"
-				style="width:100%;" type="submit">
+			<input class="btn" id="submit2" type="submit" value="提交">
 		</form>
 	</div>
-
 	<script>
 		var handler2 = function(captchaObj) {
 			$("#submit2").click(function(e) {
@@ -72,6 +67,8 @@
 							geetest_seccode : result.geetest_seccode
 						},
 						success : function(data) {
+						
+						//debugger
 							if (data.code == 0) {
 								window.location.href = "/index.html"
 							}

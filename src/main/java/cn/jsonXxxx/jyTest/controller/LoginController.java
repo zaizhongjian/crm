@@ -13,6 +13,8 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +26,7 @@ import cn.jsonXxxx.jyTest.utils.Verification;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
-	@RequestMapping("/tologin")
-	public String loginView() {
-		return "/login.html";
-	}
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@PostMapping("/login")
 	@ResponseBody
@@ -76,6 +74,6 @@ public class LoginController {
 				}
 			}
 		}
-		return Result.ERROR();
+		return Result.SUCCESS();
 	}
 }
