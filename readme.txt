@@ -1,5 +1,9 @@
-1.����Ŀʹ�ÿ�ܣ�
-  ���ģ�springboot 
-  orm��mybatis-plus
-  Ȩ�ޣ�shiro
-  ǰ�ˣ�weAdmin���
+1.该项目使用框架：
+  核心：springboot 
+  orm：mybatis-plus
+  权限：shiro
+  前端：weAdmin框架
+数据库脚本：crm.sql
+两个用户：
+  1.用户名：admin，密码：admin
+  2.用户名：ad,密码：admin
