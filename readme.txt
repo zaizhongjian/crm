@@ -2,7 +2,7 @@
   核心：springboot 
   orm：mybatis-plus
   权限：shiro
-  前端：weAdmin框架
+  前端：layUi
 数据库脚本：crm.sql
 两个用户：
   1.用户名：admin，密码：admin
