@@ -84,14 +84,15 @@ public class ShiroConfiguration {
 		shiroFilterFactoryBean.setSuccessUrl("/login/toindex");
 		filterChainDefinitionMap.put("/login/**", "anon");
 		filterChainDefinitionMap.put("/public/**", "anon");
-		
+
 		filterChainDefinitionMap.put("/css/**", "anon");
 		filterChainDefinitionMap.put("/fonts/**", "anon");
 		filterChainDefinitionMap.put("/images/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/layui/**", "anon");
 		filterChainDefinitionMap.put("/favicon.ico", "anon");
-		
+		filterChainDefinitionMap.put("/json/**", "anon");
+
 		// 设置登录的URL为匿名访问，因为一开始没有用户验证
 		filterChainDefinitionMap.put("/Exception.class", "anon");
 		// 退出系统的过滤器
