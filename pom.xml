@@ -93,7 +93,11 @@
 			<artifactId>shiro-core</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-
+		<!-- thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 
 	</dependencies>
 </project>

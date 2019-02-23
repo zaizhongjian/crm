@@ -80,16 +80,20 @@ public class ShiroConfiguration {
 		// 拦截器.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 		// 设置login URL
-		shiroFilterFactoryBean.setLoginUrl("/login.html");
+		shiroFilterFactoryBean.setLoginUrl("/login/tologin");
+		shiroFilterFactoryBean.setSuccessUrl("/login/toindex");
 		filterChainDefinitionMap.put("/login/**", "anon");
 		filterChainDefinitionMap.put("/public/**", "anon");
-		// filterChainDefinitionMap.put("/resource/**", "anon");
-		filterChainDefinitionMap.put("/static/**", "anon");
-
+		
+		filterChainDefinitionMap.put("/css/**", "anon");
+		filterChainDefinitionMap.put("/fonts/**", "anon");
+		filterChainDefinitionMap.put("/images/**", "anon");
+		filterChainDefinitionMap.put("/js/**", "anon");
+		filterChainDefinitionMap.put("/layui/**", "anon");
+		filterChainDefinitionMap.put("/favicon.ico", "anon");
+		
 		// 设置登录的URL为匿名访问，因为一开始没有用户验证
 		filterChainDefinitionMap.put("/Exception.class", "anon");
-		// 我写的url一般都是xxx.action，根据你的情况自己修改
-		// filterChainDefinitionMap.put("/*.action", "authc");
 		// 退出系统的过滤器
 		filterChainDefinitionMap.put("/logout", "logout");
 		// 最后一班都，固定格式

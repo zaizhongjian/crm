@@ -28,6 +28,21 @@ import cn.jsonXxxx.jyTest.utils.Verification;
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+	@RequestMapping("/tologin")
+	public String tologin() {
+		return "/login";
+	}
+
+	@RequestMapping("/toindex")
+	public String tooindex() {
+		return "/index";
+	}
+
+	@RequestMapping("/tomain")
+	public String tomain() {
+		return "/main";
+	}
+
 	@PostMapping("/login")
 	@ResponseBody
 	public Result LoginTest(String username, String password, HttpServletRequest request,
