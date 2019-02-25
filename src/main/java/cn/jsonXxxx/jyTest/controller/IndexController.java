@@ -17,7 +17,7 @@ import cn.jsonXxxx.jyTest.service.IUserService;
  */
 @Controller
 @RequestMapping("/index")
-public class Index {
+public class IndexController {
 
 	@Autowired
 	private IUserService userService;
@@ -35,6 +35,11 @@ public class Index {
 
 	@RequestMapping("/menu")
 	public String meneIndex() {
+		return "/page/404";
+	}
+
+	@RequestMapping("/to404")
+	public String to404Index() {
 		return "/page/404";
 	}
 

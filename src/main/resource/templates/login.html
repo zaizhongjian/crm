@@ -10,6 +10,14 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
 </head>
+<script type="text/javascript">
+	//最外层窗口跳转到登陆页面
+	// 判断当前location 是否为顶层 来禁止frame引用，如果页面当中有自定义的frame的话，也可以将parent  self   top换为自定义frame的名称 ，效果就是在自定义frame窗口打开url。
+	if (top != window) {
+		top.location.href = window.location.href;
+	}
+</script>
+
 <body class="login-bg">
 	<div class="login">
 		<div class="message">客户管理系统</div>
@@ -59,10 +67,14 @@
 							geetest_seccode : result.geetest_seccode
 						},
 						success : function(data) {
-	
 							//debugger
 							if (data.code == 0) {
 								window.location.href = "/login/toindex"
+							}
+						},
+						error: function(jqXHR, textStatus, errorThrown){
+							if(jqXHR.status==404){
+								window.location.href = "/index/to404"
 							}
 						}
 					})
