@@ -56,14 +56,41 @@
 					<td th:text="${user.mobile}"></td>
 					<td th:text="${user.status}"></td>
 					<td>
-						<button class="layui-btn layui-btn-radius layui-btn-normal">修改</button>
-						<button class="layui-btn layui-btn-radius layui-btn-danger">删除</button>
+						<button id="updateUser"
+							class="layui-btn layui-btn-radius layui-btn-normal">修改</button>
+						<button id="deleteUser"
+							class="layui-btn layui-btn-radius layui-btn-danger">删除</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<div id="page"></div>
+	<script th:src="@{/layui/jquery.js}"></script>
 	<script th:src="@{/layui/layui.js}"></script>
+	<script type="text/javascript">
+		layui.config({
+			base : "/lasyui/js/"
+		}).use([ 'form', 'element', 'layer', 'jquery' ], function() {
+			$("#updateUser").click(function() {
+				var index = layui.layer.open({
+					title : "修改用户",
+					type : 2,
+					content : "/index/role",
+					success : function(layero, index) {
+						layui.layer.tips('点击此处返回文章列表', '.layui-layer-setwin .layui-layer-close', {
+							tips : 3
+						});
+					}
+				})
+				//改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
+				$(window).resize(function() {
+					layui.layer.full(index);
+				})
+				layui.layer.full(index);
+			})
+		})
+	</script>
+
 </body>
 </html>
