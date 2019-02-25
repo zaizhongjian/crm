@@ -1,9 +1,9 @@
 package cn.jsonXxxx.jyTest.controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,6 +79,13 @@ public class UserController {
 			return Result.ERROR().addMsg("操作失败");
 		}
 
+	}
+
+	@RequestMapping("/findMenuByUser")
+	public Result findMenuByUser() {
+		String username = (String) SecurityUtils.getSubject().getPrincipal();
+
+		return null;
 	}
 
 }

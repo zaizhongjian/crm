@@ -1,9 +1,14 @@
 package cn.jsonXxxx.jyTest.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * <p>
@@ -15,115 +20,135 @@ import com.baomidou.mybatisplus.annotation.TableId;
  */
 public class Menu implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @TableId(value = "menu_id", type = IdType.AUTO)
-    private Long menuId;
-    /**
-     * 父菜单ID，一级菜单为0
-     */
-    private Long parentId;
-    /**
-     * 菜单名称
-     */
-    private String name;
-    /**
-     * 菜单URL
-     */
-    private String url;
-    /**
-     * 授权(多个用逗号分隔，如：user:list,user:create)
-     */
-    private String perms;
-    /**
-     * 类型   0：目录   1：菜单   2：按钮
-     */
-    private Integer type;
-    /**
-     * 菜单图标
-     */
-    private String icon;
-    /**
-     * 排序
-     */
-    private Integer orderNum;
+	@TableId(value = "menu_id", type = IdType.AUTO)
+	@JsonIgnore
+	private Long menuId;
+	/**
+	 * 父菜单ID，一级菜单为0
+	 */
+	@JsonIgnore
+	private Long parentId;
+	/**
+	 * 菜单名称
+	 */
+	private String title;
+	/**
+	 * 菜单URL
+	 */
+	private String href;
+	/**
+	 * 授权(多个用逗号分隔，如：user:list,user:create)
+	 */
+	@JsonIgnore
+	private String perms;
+	/**
+	 * 类型 0：目录 1：菜单 2：按钮
+	 */
+	@JsonIgnore
+	private Integer type;
+	/**
+	 * 菜单图标
+	 */
+	private String icon;
+	/**
+	 * 排序
+	 */
+	@JsonIgnore
+	private Integer orderNum;
 
+	@TableField(exist = false)
+	private List<Menu> children = new ArrayList<Menu>();
 
-    public Long getMenuId() {
-        return menuId;
-    }
+	@TableField(exist = false)
+	private Boolean spread = false;
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
-    }
+	public Long getMenuId() {
+		return menuId;
+	}
 
-    public Long getParentId() {
-        return parentId;
-    }
+	public void setMenuId(Long menuId) {
+		this.menuId = menuId;
+	}
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
+	public Long getParentId() {
+		return parentId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getUrl() {
-        return url;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
+	public String getHref() {
+		return href;
+	}
 
-    public String getPerms() {
-        return perms;
-    }
+	public void setHref(String href) {
+		this.href = href;
+	}
 
-    public void setPerms(String perms) {
-        this.perms = perms;
-    }
+	public Boolean getSpread() {
+		return spread;
+	}
 
-    public Integer getType() {
-        return type;
-    }
+	public void setSpread(Boolean spread) {
+		this.spread = spread;
+	}
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
+	public String getPerms() {
+		return perms;
+	}
 
-    public String getIcon() {
-        return icon;
-    }
+	public void setPerms(String perms) {
+		this.perms = perms;
+	}
 
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
+	public Integer getType() {
+		return type;
+	}
 
-    public Integer getOrderNum() {
-        return orderNum;
-    }
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
-    }
+	public String getIcon() {
+		return icon;
+	}
 
-    @Override
-    public String toString() {
-        return "Menu{" +
-        ", menuId=" + menuId +
-        ", parentId=" + parentId +
-        ", name=" + name +
-        ", url=" + url +
-        ", perms=" + perms +
-        ", type=" + type +
-        ", icon=" + icon +
-        ", orderNum=" + orderNum +
-        "}";
-    }
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	public List<Menu> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Menu> children) {
+		this.children = children;
+	}
+
+	@Override
+	public String toString() {
+		return "Menu [menuId=" + menuId + ", parentId=" + parentId + ", title=" + title + ", href=" + href + ", perms="
+				+ perms + ", type=" + type + ", icon=" + icon + ", orderNum=" + orderNum + ", children=" + children
+				+ ", spread=" + spread + "]";
+	}
+
 }

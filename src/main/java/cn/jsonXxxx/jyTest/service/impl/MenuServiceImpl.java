@@ -1,5 +1,8 @@
 package cn.jsonXxxx.jyTest.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -18,5 +21,13 @@ import cn.jsonXxxx.jyTest.service.IMenuService;
  */
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
+
+	@Autowired
+	private MenuMapper mapper;
+
+	@Override
+	public List<Menu> findMenuByUsername(String username) {
+		return mapper.findMenuByUsername(username);
+	}
 
 }

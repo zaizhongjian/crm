@@ -1,5 +1,7 @@
 package cn.jsonXxxx.jyTest.mapper;
 
+import java.util.List;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import cn.jsonXxxx.jyTest.entity.Menu;
@@ -13,5 +15,5 @@ import cn.jsonXxxx.jyTest.entity.Menu;
  * @since 2019-02-21
  */
 public interface MenuMapper extends BaseMapper<Menu> {
-
+	List<Menu> findMenuByUsername(String username);
 }

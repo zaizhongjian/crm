@@ -19,8 +19,8 @@
 			<collection property="menus" ofType="cn.jsonXxxx.jyTest.entity.Menu">
 				<id column="menu_id" property="menuId"/>
 				<result column="parent_id" property="parentId"/>
-				<result column="name" property="name"/>
-				<result column="url" property="url"/>
+				<result column="title" property="title"/>
+				<result column="href" property="href"/>
 				<result column="perms" property="perms"/>
 				<result column="type" property="type"/>
 				<result column="icon" property="icon"/>
@@ -32,7 +32,7 @@
 		select 
 			u.user_id,u.username,u.password,u.salt,u.email,u.mobile,u.status,u.create_time ucreate_time,
 			r.role_id,r.role_name,r.remark,r.dept_id,r.create_time,
-			m.menu_id,m.parent_id,m.name,m.url,m.perms,m.type,m.icon,m.order_num
+			m.menu_id,m.parent_id,m.title,m.href,m.perms,m.type,m.icon,m.order_num
 		 from user u 
 		 left join user_role ur on u.user_id=ur.user_id
 		 left join role r on ur.role_id=r.role_id

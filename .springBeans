@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:cn.jsonXxxx.jyTest.SpringBoot2Application</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

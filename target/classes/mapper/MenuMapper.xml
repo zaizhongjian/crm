@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.jsonXxxx.jyTest.mapper.MenuMapper">
-
-</mapper>
+	<resultMap type="cn.jsonXxxx.jyTest.entity.Menu" id="menuMap">
+		<id column="mmenuId" property="menuId"/>
+		<result column="mparentmId" property="parentId"/>
+		<result column="mtitle" property="title"/>
+		<result column="mhref" property="href"/>
+		<result column="mperms" property="perms"/>
+		<result column="mtype" property="type"/>
+		<result column="micon" property="icon"/>
+		<result column="morderNum" property="orderNum"/>
+		<collection property="children" ofType="cn.jsonXxxx.jyTest.entity.Menu">
+			<id column="cmenuId" property="menuId"/>
+			<result column="cparentId" property="parentId"/>
+			<result column="ctitle" property="title"/>
+			<result column="chref" property="href"/>
+			<result column="cperms" property="perms"/>
+			<result column="ctype" property="type"/>
+			<result column="cicon" property="icon"/>
+			<result column="orderNum" property="orderNum"/>
+		</collection>
+	</resultMap>
+	<select id="findMenuByUsername" resultMap="menuMap" parameterType="java.lang.String">
+		select 
+			m.menu_id mmenuId,m.parent_id mparentId,m.title mtitle,m.href mhref,m.perms mperms,m.type mtype,m.icon micon,m.order_num morderNum,
+			c.menu_id cmenuId,c.parent_id cparentId,c.title ctitle,c.href chref,c.perms cperms,c.type ctype,c.icon cicon,c.order_num corderNum
+		 from user u 
+		 left join user_role ur on u.user_id=ur.user_id
+		 left join role r on ur.role_id=r.role_id
+		 left join role_menu rm on r.role_id=rm.role_id
+		 left join menu m on rm.menu_id=m.menu_id and m.parent_id=0
+		 left join menu c on c.parent_id = m.menu_id and c.href is not null
+		 where u.username=#{username}
+	</select>
+</mapper>	
