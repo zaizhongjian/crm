@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.User;
+import cn.jsonXxxx.jyTest.query.BaseQuery;
 
 /**
  * <p>
@@ -14,7 +15,21 @@ import cn.jsonXxxx.jyTest.entity.User;
  * @since 2019-02-21
  */
 public interface IUserService extends IService<User> {
+	/**
+	 * 根据用户名查询用户（权限认证时候使用的）
+	 * 
+	 * @param username
+	 * @return
+	 */
 	User getByUsername(String username);
 
-	PageList<User> findAll(Integer currentPage, Integer pageSize);
+	/**
+	 * 获取用户根据查询条件。可以匹配模糊查询
+	 * 
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	PageList<User> findAll(BaseQuery query);
+
 }

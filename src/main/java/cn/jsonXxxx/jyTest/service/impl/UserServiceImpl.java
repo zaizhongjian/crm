@@ -2,6 +2,7 @@ package cn.jsonXxxx.jyTest.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.User;
 import cn.jsonXxxx.jyTest.mapper.UserMapper;
+import cn.jsonXxxx.jyTest.query.BaseQuery;
 import cn.jsonXxxx.jyTest.service.IUserService;
 
 /**
@@ -36,12 +38,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	}
 
 	@Override
-	public PageList<User> findAll(Integer currentPage, Integer pageSize) {
-		IPage<User> page = new Page<User>(currentPage, pageSize);
+	public PageList<User> findAll(BaseQuery query) {
+		// 分页对象
+		IPage<User> page = new Page<User>(query.getPage(), query.getLimit());
 		IPage<User> selectPage = null;
+		// 传回前台的分页对象
 		PageList<User> pageList = new PageList<User>();
+		// 查询条件的封装
+		QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+		// 关键字
+		String key = query.getKey();
+		if (StringUtils.isNotBlank(key)) {
+			queryWrapper.like("user_id", key).or().like("username", key).or().like("email", key).or().like("mobile",
+					key);
+		}
 		try {
-			selectPage = mapper.selectPage(page, new QueryWrapper<User>());
+			selectPage = mapper.selectPage(page, queryWrapper);
 			pageList.setCode(0L);
 		} catch (Exception e) {
 			e.printStackTrace();

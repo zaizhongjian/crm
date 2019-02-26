@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.Result;
 import cn.jsonXxxx.jyTest.entity.User;
+import cn.jsonXxxx.jyTest.query.BaseQuery;
 import cn.jsonXxxx.jyTest.service.IUserService;
 import cn.jsonXxxx.jyTest.shiro.PasswordHelper;
 
@@ -41,9 +42,8 @@ public class UserController {
 	 */
 	@RequiresPermissions("user:list")
 	@RequestMapping("/list")
-	public PageList<User> findAll(@RequestParam(defaultValue = "1") Integer page,
-			@RequestParam(defaultValue = "10") Integer limit) {
-		return service.findAll(page, limit);
+	public PageList<User> findAll(BaseQuery query) {
+		return service.findAll(query);
 	}
 
 	@RequestMapping("/insertOrUpdate")
