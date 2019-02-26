@@ -53,13 +53,14 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 				title : '用户状态',
 				align : 'center',
 				templet : function(d) {
-					return d.status == "1" ? "正常使用" : "限制使用";
+					return d.status == "1" ? "<span style='color:green'>正常使用<span>" : "<span style='color:red'>限制使用<span>";
 				}
 			},
 			{
 				field : 'status',
-				title : '用户性别',
+				title : '性别',
 				align : 'center',
+				maxWidth: 70,
 				templet : function(d) {
 					return d.status == "1" ? "男" : "女";
 				}
@@ -95,20 +96,15 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 
 	//搜索【此功能需要后台配合，所以暂时没有动态效果演示】
 	$(".search_btn").on("click", function() {
-		alert(1)
-		debugger
-		if ($(".searchVal").val() != '') {
-			table.reload("userListTable", {
-				page : {
-					curr : 1 //重新从第 1 页开始
-				},
-				where : {
-					key : $(".searchVal").val() //搜索的关键字
-				}
-			})
-		} else {
-			layer.msg("请输入搜索的内容");
-		}
+		//如果关键字为空，那就查询出所有数据
+		table.reload("userListTable", {
+			page : {
+				curr : 1 //重新从第 1 页开始
+			},
+			where : {
+				key : $(".searchVal").val() //搜索的关键字
+			}
+		})
 	});
 
 	//添加用户
@@ -213,7 +209,7 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 						layer.alert("删除成功");
 						tableIns.reload();
 						layer.close(index);
-					}else{
+					} else {
 						layer.alert("删除成功");
 						layer.close(index);
 					}

@@ -30,17 +30,17 @@ public class LoginController {
 
 	@RequestMapping("/tologin")
 	public String tologin() {
-		return "/login";
+		return "login";
 	}
 
 	@RequestMapping("/toindex")
 	public String tooindex() {
-		return "/index";
+		return "index";
 	}
 
 	@RequestMapping("/tomain")
 	public String tomain() {
-		return "/main";
+		return "main";
 	}
 
 	@PostMapping("/login")

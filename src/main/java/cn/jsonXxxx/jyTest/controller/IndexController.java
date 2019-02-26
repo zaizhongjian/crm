@@ -13,31 +13,31 @@ public class IndexController {
 
 	@RequestMapping("/user")
 	public String userIndex() {
-		return "/page/user/userList";
+		return "page/user/userList";
 	}
 
 	@RequestMapping("/role")
 	public String roleIndex() {
-		return "/page/404";
+		return "page/404";
 	}
 
 	@RequestMapping("/menu")
 	public String meneIndex() {
-		return "/page/404";
+		return "page/404";
 	}
 
 	@RequestMapping("/to404")
 	public String to404Index() {
-		return "/page/404";
+		return "page/404";
 	}
 
 	@RequestMapping("/main")
 	public String toWelcome() {
-		return "/page/main";
+		return "page/main";
 	}
 
 	@RequestMapping("/toUserAdd")
 	public String toadd() {
-		return "/page/user/userAdd";
+		return "page/user/userAdd";
 	}
 }
