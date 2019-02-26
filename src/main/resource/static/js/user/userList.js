@@ -13,18 +13,21 @@ layui.use(['form','layer','table','laytpl'],function(){
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
-        limit : 20,
+        limit : 10,
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'userId', title: '用户id', minWidth:100, align:"center"},
+            {field: 'userId', title: '用户id', width:70, align:"center"},
             {field: 'username', title: '用户名', minWidth:100, align:"center"},
             {field: 'email', title: '用户邮箱', minWidth:200, align:'center',templet:function(d){
                 return '<a class="layui-blue" href="mailto:'+d.email+'">'+d.email+'</a>';
             }},
-            {field: 'mobile', title: '用户名', minWidth:100, align:"center"},
+            {field: 'mobile', title: '手机号码', minWidth:100, align:"center"},
             {field: 'status', title: '用户状态',  align:'center',templet:function(d){
             	return d.status == "1" ? "正常使用" : "限制使用";
+            }},
+            {field: 'status', title: '用户性别',  align:'center',templet:function(d){
+            	return d.status == "1" ? "男" : "女";
             }},
           /*  {field: 'userGrade', title: '用户等级', align:'center',templet:function(d){
                 if(d.userGrade == "0"){
@@ -62,19 +65,22 @@ layui.use(['form','layer','table','laytpl'],function(){
 
     //添加用户
     function addUser(edit){
+    	console.log(edit)
         var index = layui.layer.open({
             title : "添加用户",
             type : 2,
-            content : "userAdd.html",
+            content : "/index/toUserAdd",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
-                    body.find(".userName").val(edit.userName);  //登录名
-                    body.find(".userEmail").val(edit.userEmail);  //邮箱
-                    body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-                    body.find(".userGrade").val(edit.userGrade);  //会员等级
-                    body.find(".userStatus").val(edit.userStatus);    //用户状态
-                    body.find(".userDesc").text(edit.userDesc);    //用户简介
+                    body.find(".userName").val(edit.username);  //登录名
+//                    body.find("#password1").val(edit.password);  //登录名
+//                    body.find("#password2").val(edit.password);  //登录名
+                    body.find(".userEmail").val(edit.email);  //邮箱
+                    body.find("#userPhone").val(edit.mobile);  //邮箱
+                    body.find(".userSex input[value="+edit.sex+"]").prop("checked","checked");  //性别
+                    body.find(".userStatus").val(edit.status);    //用户状态
+                    body.find("#userId").val(edit.userId);   
                     form.render();
                 }
                 setTimeout(function(){

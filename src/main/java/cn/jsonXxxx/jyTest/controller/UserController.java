@@ -1,8 +1,9 @@
 package cn.jsonXxxx.jyTest.controller;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Objects;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -11,9 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.Result;
@@ -43,18 +41,35 @@ public class UserController {
 	 */
 	@RequiresPermissions("user:list")
 	@RequestMapping("/list")
-	public PageList<User> findAll(@RequestParam(defaultValue="1")Integer currentPage, @RequestParam(defaultValue="10")Integer pageSize) {
-			return service.findAll(currentPage, pageSize);
+	public PageList<User> findAll(@RequestParam(defaultValue = "1") Integer page,
+			@RequestParam(defaultValue = "10") Integer limit) {
+		return service.findAll(page, limit);
 	}
 
 	@RequestMapping("/insertOrUpdate")
 	public Result insertOrUpdate(User user) {
+		// 判断密码是否为空
+		// if (StringUtils.isBlank(password1)) {
+		// return Result.ERROR().addMsg("密码不能为空");
+		// }
+		// if (StringUtils.isBlank(password2)) {
+		// return Result.ERROR().addMsg("确认密码不能为空");
+		// }
+		// // 判读两次输入的密码是否想同
+		// if (!Objects.equals(password1, password2)) {
+		// return Result.ERROR().addMsg("两次密码不同");
+		// }
 		// 判断用户是否为空
 		if (Objects.isNull(user)) {
 			return Result.ERROR().addMsg("用户验证不通过");
 		}
-		PasswordHelper passwordHelper = new PasswordHelper();
-		passwordHelper.encryptPassword(user);
+		// 默认密码admin(新增的情况)
+		if (user.getUserId() == null) {
+			PasswordHelper passwordHelper = new PasswordHelper();
+			user.setPassword("admin");
+			passwordHelper.encryptPassword(user);
+			user.setCreateTime(new Date());
+		}
 		try {
 			service.saveOrUpdate(user);
 			return Result.SUCCESS();
@@ -82,12 +97,4 @@ public class UserController {
 		}
 
 	}
-
-	@RequestMapping("/findMenuByUser")
-	public Result findMenuByUser() {
-		String username = (String) SecurityUtils.getSubject().getPrincipal();
-
-		return null;
-	}
-
 }

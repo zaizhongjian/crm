@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2019-02-26 13:04:47
+Date: 2019-02-26 15:17:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -161,16 +161,25 @@ CREATE TABLE `user` (
   `mobile` varchar(100) DEFAULT NULL COMMENT '手机号',
   `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `sex` bit(1) DEFAULT NULL COMMENT '性别',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', 'b730466880360ca678ea910d9dedf41a', 'f6a3f0b398db2210c8c9a504c8a80ad7', 'root@renren.io', '13612345678', '1', '2016-11-11 11:11:11');
-INSERT INTO `user` VALUES ('2', 'ad', 'b730466880360ca678ea910d9dedf41a', 'f6a3f0b398db2210c8c9a504c8a80ad7', '840267572@qq.com', '15202862531', '1', '2019-02-14 13:53:06');
-INSERT INTO `user` VALUES ('4', 'jinxu', 'b2619e99a5a836e124b607a6d0b77f04', 'a21a219894cb243b45740f3c22f0325e', '840267572@qq.com', '15202862531', '0', '2019-02-26 11:56:37');
+INSERT INTO `user` VALUES ('1', 'admin', 'b730466880360ca678ea910d9dedf41a', 'f6a3f0b398db2210c8c9a504c8a80ad7', 'root@renren.io', '13618050721', '0', '2016-11-11 11:11:11', '');
+INSERT INTO `user` VALUES ('2', 'ad', 'b730466880360ca678ea910d9dedf41a', 'f6a3f0b398db2210c8c9a504c8a80ad7', '840267572@qq.com', '15202862531', '1', '2019-02-14 13:53:06', '');
+INSERT INTO `user` VALUES ('4', 'jinxu', 'b2619e99a5a836e124b607a6d0b77f04', 'a21a219894cb243b45740f3c22f0325e', '840267572@qq.com', '15202862531', '0', '2019-02-26 11:56:37', '');
+INSERT INTO `user` VALUES ('6', 'jsonXxxx', '62546bf55a28614f99932e4b684b7300', '5bffbdf840906f4072e3cf103ef3bc3c', '191936793@qq.com', null, '1', null, '');
+INSERT INTO `user` VALUES ('7', '123123', '0add750899c7df43c7b09ee913f50d44', 'e7d3b4e5fe8a6718ec7df81aa310d8dd', '191936793@qq.com', null, '1', '2019-02-26 05:58:04', '');
+INSERT INTO `user` VALUES ('8', '555', '209fc7c5d6fcd1059d83385d2c0bdb3a', 'f35f5eed45a6a52450860d4f82461dcd', '191936793@qq.com', null, '1', '2019-02-26 06:08:20', '');
+INSERT INTO `user` VALUES ('9', '2222', 'b0b08d98be0114d7395fcb44c0eb0814', '54522dc15034f6438893cc6fe7212bfe', '191936793@qq.com', null, '1', '2019-02-26 06:17:05', '');
+INSERT INTO `user` VALUES ('10', 'Sccc', 'bc5ff1ebc58a727523ceb183defcd6fa', '5d2866287c9a9db745fa6e4f1db11c8c', '191936793@qq.com', '13618050721', '1', '2019-02-26 06:19:19', '');
+INSERT INTO `user` VALUES ('11', 'new', '033ab3164d2b8b587f585b8f3caf7336', '67bcdc363d8dba9c94edeba2d70e9cba', '321@qq.com', '13618050721', '1', '2019-02-26 06:19:40', '');
+INSERT INTO `user` VALUES ('12', 'Ame', '79b90a1b7f615e28d0361d61502b04ce', 'b5cce97292bc0ae6ebdeefd78ed0c344', '321@qq.com', '13618050721', '1', '2019-02-26 06:20:00', '');
+INSERT INTO `user` VALUES ('13', 'Shadow', 'c8b13180c1bf6ceb87f7f88f9f2878e0', 'da3b039726a392ff2895eb6aa6eae320', '321@qq.com', '13618050721', '1', '2019-02-26 06:20:58', '');
 
 -- ----------------------------
 -- Table structure for `user_role`

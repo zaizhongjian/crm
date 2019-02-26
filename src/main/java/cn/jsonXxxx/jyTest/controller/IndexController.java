@@ -1,15 +1,7 @@
 package cn.jsonXxxx.jyTest.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-
-import cn.jsonXxxx.jyTest.entity.User;
-import cn.jsonXxxx.jyTest.service.IUserService;
 
 /**
  * @author jsonXxxx 主要返回页面
@@ -20,8 +12,8 @@ import cn.jsonXxxx.jyTest.service.IUserService;
 public class IndexController {
 
 	@RequestMapping("/user")
-	public String userIndex(Model model) {
-		return "/page/user/userList.html";
+	public String userIndex() {
+		return "/page/user/userList";
 	}
 
 	@RequestMapping("/role")
@@ -44,4 +36,8 @@ public class IndexController {
 		return "/page/main";
 	}
 
+	@RequestMapping("/toUserAdd")
+	public String toadd() {
+		return "/page/user/userAdd";
+	}
 }

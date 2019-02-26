@@ -51,6 +51,10 @@ public class User implements Serializable {
 	 * 创建时间
 	 */
 	private Date createTime;
+	/**
+	 * 性别(0:女,1:男)
+	 */
+	private int sex;
 	@TableField(exist = false)
 	private List<Role> roles = new ArrayList<Role>();
 
@@ -126,11 +130,19 @@ public class User implements Serializable {
 		this.roles = roles;
 	}
 
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", salt=" + salt
 				+ ", email=" + email + ", mobile=" + mobile + ", status=" + status + ", createTime=" + createTime
-				+ ", roles=" + roles + "]";
+				+ ", sex=" + sex + ", roles=" + roles + "]";
 	}
 
 }
