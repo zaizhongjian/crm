@@ -90,8 +90,8 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/images/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/layui/**", "anon");
-		filterChainDefinitionMap.put("/favicon.ico", "anon");
 		filterChainDefinitionMap.put("/json/**", "anon");
+		filterChainDefinitionMap.put("/favicon.ico", "anon");
 
 		// 设置登录的URL为匿名访问，因为一开始没有用户验证
 		filterChainDefinitionMap.put("/Exception.class", "anon");

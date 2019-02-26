@@ -1,8 +1,8 @@
-1.该项目使用框架：
+﻿1.该项目使用框架：
   核心：springboot 
   orm：mybatis-plus
   权限：shiro
-  前端：layUi
+  前端：layUi(weadmin前端模板)
 数据库脚本：crm.sql
 两个用户：
   1.用户名：admin，密码：admin

@@ -2,6 +2,7 @@ package cn.jsonXxxx.jyTest.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.User;
 
 /**
@@ -14,4 +15,6 @@ import cn.jsonXxxx.jyTest.entity.User;
  */
 public interface IUserService extends IService<User> {
 	User getByUsername(String username);
+
+	PageList<User> findAll(Integer currentPage, Integer pageSize);
 }

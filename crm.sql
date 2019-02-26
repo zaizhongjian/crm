@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2019-02-22 13:59:40
+Date: 2019-02-26 13:04:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,8 +42,8 @@ DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `menu_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `parent_id` bigint(20) DEFAULT NULL COMMENT '父菜单ID，一级菜单为0',
-  `name` varchar(50) DEFAULT NULL COMMENT '菜单名称',
-  `url` varchar(200) DEFAULT NULL COMMENT '菜单URL',
+  `title` varchar(50) DEFAULT NULL COMMENT '菜单名称',
+  `href` varchar(200) DEFAULT NULL COMMENT '菜单URL',
   `perms` varchar(500) DEFAULT NULL COMMENT '授权(多个用逗号分隔，如：user:list,user:create)',
   `type` int(11) DEFAULT NULL COMMENT '类型   0：目录   1：菜单   2：按钮',
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
@@ -54,10 +54,10 @@ CREATE TABLE `menu` (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('1', '0', '系统管理', null, null, '0', 'fa fa-cog', '0');
-INSERT INTO `menu` VALUES ('2', '1', '管理员管理', 'modules/sys/user.html', null, '1', 'fa fa-user', '1');
-INSERT INTO `menu` VALUES ('3', '1', '角色管理', 'modules/sys/role.html', null, '1', 'fa fa-user-secret', '2');
-INSERT INTO `menu` VALUES ('4', '1', '菜单管理', 'modules/sys/menu.html', null, '1', 'fa fa-th-list', '3');
+INSERT INTO `menu` VALUES ('1', '0', '系统管理', null, null, '0', 'icon-computer', '0');
+INSERT INTO `menu` VALUES ('2', '1', '管理员管理', '/index/user', null, '1', 'icon-text', '1');
+INSERT INTO `menu` VALUES ('3', '1', '角色管理', '/index/role', null, '1', 'icon-text', '2');
+INSERT INTO `menu` VALUES ('4', '1', '菜单管理', '/index/menu', null, '1', 'icon-text', '3');
 INSERT INTO `menu` VALUES ('7', '6', '查看', null, 'schedule:list,schedule:info', '2', null, '0');
 INSERT INTO `menu` VALUES ('8', '6', '新增', null, 'schedule:save', '2', null, '0');
 INSERT INTO `menu` VALUES ('9', '6', '修改', null, 'schedule:update', '2', null, '0');
@@ -68,7 +68,7 @@ INSERT INTO `menu` VALUES ('13', '6', '立即执行', null, 'schedule:run', '2',
 INSERT INTO `menu` VALUES ('14', '6', '日志列表', null, 'schedule:log', '2', null, '0');
 INSERT INTO `menu` VALUES ('15', '2', '查看', null, 'user:list,user:info', '2', null, '0');
 INSERT INTO `menu` VALUES ('16', '2', '新增', null, 'user:save,role:select', '2', null, '0');
-INSERT INTO `menu` VALUES ('17', '2', '修改', null, 'user:update,role:select', '2', null, '0');
+INSERT INTO `menu` VALUES ('17', '2', '修改', null, 'user:update,role:select,user:delete', '2', null, '0');
 INSERT INTO `menu` VALUES ('18', '2', '删除', null, 'user:delete', '2', null, '0');
 INSERT INTO `menu` VALUES ('19', '3', '查看', null, 'role:list,role:info', '2', null, '0');
 INSERT INTO `menu` VALUES ('20', '3', '新增', null, 'role:save,menu:perms', '2', null, '0');
@@ -78,8 +78,8 @@ INSERT INTO `menu` VALUES ('23', '4', '查看', null, 'menu:list,menu:info', '2'
 INSERT INTO `menu` VALUES ('24', '4', '新增', null, 'menu:save,menu:select', '2', null, '0');
 INSERT INTO `menu` VALUES ('25', '4', '修改', null, 'menu:update,menu:select', '2', null, '0');
 INSERT INTO `menu` VALUES ('26', '4', '删除', null, 'menu:delete', '2', null, '0');
-INSERT INTO `menu` VALUES ('29', '1', '系统日志', 'modules/sys/log.html', 'log:list', '1', 'fa fa-file-text-o', '7');
-INSERT INTO `menu` VALUES ('30', '1', '文件上传', 'modules/oss/oss.html', 'oss:all', '1', 'fa fa-file-image-o', '6');
+INSERT INTO `menu` VALUES ('29', '1', '系统日志', 'modules/sys/log.html', 'log:list', '1', 'icon-text', '7');
+INSERT INTO `menu` VALUES ('30', '1', '文件上传', 'modules/oss/oss.html', 'oss:all', '1', 'icon-text', '6');
 INSERT INTO `menu` VALUES ('32', '31', '查看', null, 'dept:list,dept:info', '2', null, '0');
 INSERT INTO `menu` VALUES ('33', '31', '新增', null, 'dept:save,dept:select', '2', null, '0');
 INSERT INTO `menu` VALUES ('34', '31', '修改', null, 'dept:update,dept:select', '2', null, '0');
@@ -163,14 +163,14 @@ CREATE TABLE `user` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'admin', 'b730466880360ca678ea910d9dedf41a', 'f6a3f0b398db2210c8c9a504c8a80ad7', 'root@renren.io', '13612345678', '1', '2016-11-11 11:11:11');
 INSERT INTO `user` VALUES ('2', 'ad', 'b730466880360ca678ea910d9dedf41a', 'f6a3f0b398db2210c8c9a504c8a80ad7', '840267572@qq.com', '15202862531', '1', '2019-02-14 13:53:06');
-INSERT INTO `user` VALUES ('3', 'json', null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'jinxu', 'b2619e99a5a836e124b607a6d0b77f04', 'a21a219894cb243b45740f3c22f0325e', '840267572@qq.com', '15202862531', '0', '2019-02-26 11:56:37');
 
 -- ----------------------------
 -- Table structure for `user_role`

@@ -37,7 +37,7 @@ public class MenuController<E> {
 		// 遍历父菜单，过滤所有为空的对象
 		menuList = menuList.stream().filter(menu -> Objects.nonNull(menu)).collect(Collectors.toList());
 		// 拿到子菜单，判断url是否为空
-		return Result.SUCCESS().addData(menuList);
+		return Result.SUCCESS().addContentManagement(menuList);
 	}
 
 }

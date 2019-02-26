@@ -9,10 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 
+import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.Result;
 import cn.jsonXxxx.jyTest.entity.User;
 import cn.jsonXxxx.jyTest.service.IUserService;
@@ -40,9 +43,8 @@ public class UserController {
 	 */
 	@RequiresPermissions("user:list")
 	@RequestMapping("/list")
-	public List<User> findAll() {
-		List<User> list = service.list(new QueryWrapper<User>());
-		return list;
+	public PageList<User> findAll(@RequestParam(defaultValue="1")Integer currentPage, @RequestParam(defaultValue="10")Integer pageSize) {
+			return service.findAll(currentPage, pageSize);
 	}
 
 	@RequestMapping("/insertOrUpdate")

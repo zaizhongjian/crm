@@ -19,13 +19,9 @@ import cn.jsonXxxx.jyTest.service.IUserService;
 @RequestMapping("/index")
 public class IndexController {
 
-	@Autowired
-	private IUserService userService;
-
 	@RequestMapping("/user")
 	public String userIndex(Model model) {
-		model.addAttribute("userList", userService.list(new QueryWrapper<User>()));
-		return "/page/user";
+		return "/page/user/userList.html";
 	}
 
 	@RequestMapping("/role")
@@ -41,6 +37,11 @@ public class IndexController {
 	@RequestMapping("/to404")
 	public String to404Index() {
 		return "/page/404";
+	}
+
+	@RequestMapping("/main")
+	public String toWelcome() {
+		return "/page/main";
 	}
 
 }

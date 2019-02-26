@@ -6,21 +6,32 @@ public class Result {
 	private int code;
 	private String msg;
 	private Object data;
+	private Object contentManagement;
 
 	public Result(RespCode respCode) {
 		this.code = respCode.getCode();
 		this.msg = respCode.getMsg();
 	}
 
-	public Result(RespCode respCode, Object data) {
+	public Result(RespCode respCode, Object data, Object contentManagement) {
 		this(respCode);
 		this.data = data;
+		this.contentManagement = contentManagement;
 	}
 
-	public Result(RespCode respCode, Object data, String msg) {
+	public Result(RespCode respCode, Object data, String msg, Object contentManagement) {
 		this(respCode);
 		this.msg = msg;
 		this.data = data;
+		this.contentManagement = contentManagement;
+	}
+
+	public Object getContentManagement() {
+		return contentManagement;
+	}
+
+	public void setContentManagement(Object contentManagement) {
+		this.contentManagement = contentManagement;
 	}
 
 	public int getCode() {
@@ -49,6 +60,11 @@ public class Result {
 
 	public Result addData(Object data) {
 		this.data = data;
+		return this;
+	}
+
+	public Result addContentManagement(Object contentManagement) {
+		this.contentManagement = contentManagement;
 		return this;
 	}
 
