@@ -32,4 +32,6 @@ public interface IUserService extends IService<User> {
 	 */
 	PageList<User> findAll(BaseQuery query);
 
+	Long insertOneUser(User user);
+
 }

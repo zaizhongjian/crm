@@ -60,7 +60,7 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 				field : 'status',
 				title : '性别',
 				align : 'center',
-				maxWidth: 70,
+				maxWidth : 70,
 				templet : function(d) {
 					return d.status == "1" ? "男" : "女";
 				}
@@ -109,7 +109,6 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 
 	//添加用户
 	function addUser(edit) {
-		console.log(edit)
 		var index = layui.layer.open({
 			title : "添加用户",
 			type : 2,
@@ -149,21 +148,27 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 	$(".delAll_btn").click(function() {
 		var checkStatus = table.checkStatus('userListTable'),
 			data = checkStatus.data,
-			newsId = [];
+			userId = [];
 		if (data.length > 0) {
 			for (var i in data) {
-				newsId.push(data[i].newsId);
+				userId.push(data[i].userId);
 			}
 			layer.confirm('确定删除选中的用户？', {
 				icon : 3,
 				title : '提示信息'
 			}, function(index) {
-				// $.get("删除文章接口",{
-				//     newsId : newsId  //将需要删除的newsId作为参数传入
-				// },function(data){
-				tableIns.reload();
-				layer.close(index);
-			// })
+				$.post("/user/deleteAll", {
+					"userIds" : userId ,
+				}, function(data) {
+					if (data.code == 0) {
+						layer.alert("删除成功");
+						tableIns.reload();
+						layer.close(index);
+					} else {
+						layer.alert("删除成功");
+						layer.close(index);
+					}
+				})
 			})
 		} else {
 			layer.msg("请选择需要删除的用户");

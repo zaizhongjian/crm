@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 /**
@@ -39,6 +40,7 @@ public class Role implements Serializable {
 	 */
 	private Date createTime;
 
+	@TableField(exist = false)
 	private List<Menu> menus = new ArrayList<Menu>();
 
 	public Long getRoleId() {

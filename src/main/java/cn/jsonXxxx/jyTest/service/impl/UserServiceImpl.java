@@ -64,4 +64,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 		return pageList;
 	}
 
+	@Override
+	public Long insertOneUser(User user) {
+		return mapper.insertOneUser(user);
+	}
+
 }

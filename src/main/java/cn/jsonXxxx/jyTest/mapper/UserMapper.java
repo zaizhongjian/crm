@@ -15,5 +15,7 @@ import cn.jsonXxxx.jyTest.entity.User;
 public interface UserMapper extends BaseMapper<User> {
 
 	User getByUsername(String username);
-	
+
+	Long insertOneUser(User user);
+
 }

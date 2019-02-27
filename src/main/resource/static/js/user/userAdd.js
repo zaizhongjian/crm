@@ -1,5 +1,6 @@
-layui.use([ 'form', 'layer' ], function() {
-	var form = layui.form
+layui.use([ 'form', 'layer'], function() {
+	var form = layui.form;
+	var formSelects = layui.formSelects;
 	layer = parent.layer === undefined ? layui.layer : top.layer,
 	$ = layui.jquery;
 	form.on("submit(addUser)", function(data) {
@@ -14,9 +15,11 @@ layui.use([ 'form', 'layer' ], function() {
 			shade : 0.8
 		});
 		// 实际使用时的提交信息
+	
 		$.post("/user/insertOrUpdate", {
 			userId : $("#userId").val(),
 			username : $(".userName").val(), //登录名
+			roleIds:formSelects.value('roleSelect', 'val'),
 //			password1:$("#password1").val(),
 //			password2:$("#password2").val(),
 			email : $(".userEmail").val(), //邮箱

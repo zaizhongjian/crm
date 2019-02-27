@@ -1,14 +1,14 @@
 package cn.jsonXxxx.jyTest.controller;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +17,7 @@ import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.Result;
 import cn.jsonXxxx.jyTest.entity.User;
 import cn.jsonXxxx.jyTest.query.BaseQuery;
+import cn.jsonXxxx.jyTest.service.IUserAndRoleService;
 import cn.jsonXxxx.jyTest.service.IUserService;
 import cn.jsonXxxx.jyTest.shiro.PasswordHelper;
 
@@ -34,6 +35,8 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private IUserService service;
+	@Autowired
+	private IUserAndRoleService userAndRoleService;
 
 	/**
 	 * 查询所有的用户，并且有带有"user:list"权限才能访问
@@ -47,35 +50,20 @@ public class UserController {
 	}
 
 	@RequestMapping("/insertOrUpdate")
-	public Result insertOrUpdate(User user) {
-		// 判断密码是否为空
-		// if (StringUtils.isBlank(password1)) {
-		// return Result.ERROR().addMsg("密码不能为空");
-		// }
-		// if (StringUtils.isBlank(password2)) {
-		// return Result.ERROR().addMsg("确认密码不能为空");
-		// }
-		// // 判读两次输入的密码是否想同
-		// if (!Objects.equals(password1, password2)) {
-		// return Result.ERROR().addMsg("两次密码不同");
-		// }
-		// 判断用户是否为空
+	public Result insertOrUpdate(User user, @RequestParam(name = "roleIds[]") Long roleIds[]) {
+		// 判断用户主题是否为空
 		if (Objects.isNull(user)) {
 			return Result.ERROR().addMsg("用户验证不通过");
 		}
-		// 默认密码admin(新增的情况)
-		if (user.getUserId() == null) {
-			PasswordHelper passwordHelper = new PasswordHelper();
-			user.setPassword("admin");
-			passwordHelper.encryptPassword(user);
-			user.setCreateTime(new Date());
+		// 判断角色列表是否为空
+		if (roleIds == null) {
+			return Result.ERROR().addMsg("用户角色为空");
 		}
 		try {
-			service.saveOrUpdate(user);
+			userAndRoleService.insertUserAndRole(user, roleIds);
 			return Result.SUCCESS();
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("UserController-->insertOrUpdate()" + e.getMessage(), e);
+			logger.error("UserController-->insertOrUpdate" + e.getMessage(), e);
 			return Result.ERROR().addMsg("操作失败");
 		}
 
@@ -95,6 +83,18 @@ public class UserController {
 			logger.error("UserController-->insertOrUpdate()" + e.getMessage(), e);
 			return Result.ERROR().addMsg("操作失败");
 		}
-
 	}
+
+	@PostMapping("/deleteAll")
+	public Result deleteAll(@RequestParam(name = "userIds[]") Long[] userIds) {
+		try {
+			service.removeByIds(Arrays.asList(userIds));
+			return Result.SUCCESS();
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("UserController-->deleteAll" + e.getMessage(), e);
+			return Result.ERROR();
+		}
+	}
+
 }
