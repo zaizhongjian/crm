@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>新增或修改角色</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+<link rel="stylesheet" th:href="@{/css/public.css}" media="all" />
+<link rel="stylesheet" th:href="@{/css/formSelects-v4.css}">
+
+</head>
+<body class="childrenBody">
+	<form class="layui-form" style="width:80%;">
+
+
+		<!-- 用户名信息 -->
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">角色名</label>
+			<div class="layui-input-block">
+				<input type="text" id="roleId" hidden="hidden" /> <input
+					type="text" class="layui-input roleName" lay-verify="required"
+					placeholder="请输入角色名">
+			</div>
+		</div>
+		<!-- 邮箱 -->
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">备注</label>
+			<div class="layui-input-block">
+				<input id="remark" type="text" class="layui-input"
+					lay-verify="required" placeholder="请输入备注">
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">部门id</label>
+			<div class="layui-input-block">
+				<input type="text" id="deptId" class="layui-input"
+					lay-verify="required" placeholder="请输入部门id">
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<label class="layui-form-label">请选择权限</label>
+			<div class="layui-input-block">
+				<select xm-select="menuSelect" xm-select-search="/menu/selectList">
+				</select>
+			</div>
+		</div>
+		<div class="layui-form-item layui-row layui-col-xs12">
+			<div class="layui-input-block">
+				<button class="layui-btn layui-btn-sm" lay-submit=""
+					lay-filter="addRole">立即添加</button>
+				<button type="reset"
+					class="layui-btn layui-btn-sm layui-btn-primary">取消</button>
+			</div>
+		</div>
+	</form>
+	<script th:src="@{/layui/layui.all.js}"></script>
+	<script th:src="@{/js/formSelects-v4.js}"></script>
+	<script th:src="@{/js/role/roleAdd.js}"></script>
+</body>
+</html>

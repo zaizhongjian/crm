@@ -16,9 +16,19 @@ public class IndexController {
 		return "page/user/userList";
 	}
 
+	@RequestMapping("/toUserAdd")
+	public String toadd() {
+		return "page/user/userAdd";
+	}
+
 	@RequestMapping("/role")
 	public String roleIndex() {
-		return "page/404";
+		return "page/role/roleList";
+	}
+
+	@RequestMapping("/toRoleAdd")
+	public String toRoleAdd() {
+		return "page/role/roleAdd";
 	}
 
 	@RequestMapping("/menu")
@@ -36,8 +46,4 @@ public class IndexController {
 		return "page/main";
 	}
 
-	@RequestMapping("/toUserAdd")
-	public String toadd() {
-		return "page/user/userAdd";
-	}
 }

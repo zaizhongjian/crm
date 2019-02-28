@@ -14,4 +14,6 @@ import cn.jsonXxxx.jyTest.entity.Role;
  */
 public interface RoleMapper extends BaseMapper<Role> {
 
+	Integer insertOne(Role role);
+
 }

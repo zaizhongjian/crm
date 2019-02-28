@@ -13,5 +13,5 @@ import cn.jsonXxxx.jyTest.entity.UserRole;
  * @since 2019-02-21
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
-
+	Integer deleteUserAndRole(Long userId);
 }

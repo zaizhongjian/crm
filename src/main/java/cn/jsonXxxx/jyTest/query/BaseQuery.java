@@ -8,9 +8,9 @@ package cn.jsonXxxx.jyTest.query;
  */
 public class BaseQuery {
 	// 第几页
-	private Integer page;
+	private Integer page = 1;
 	// 每页显示多少条
-	private Integer limit;
+	private Integer limit = 10;
 	// 关键字(模糊查询使用)
 	private String key;
 

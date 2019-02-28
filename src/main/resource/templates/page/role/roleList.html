@@ -25,24 +25,24 @@
 				<a class="layui-btn search_btn" data-type="reload">搜索</a>
 			</div>
 			<div class="layui-inline">
-				<a class="layui-btn layui-btn-normal addNews_btn">添加用户</a>
+				<a class="layui-btn layui-btn-normal addNews_btn">添加角色</a>
 			</div>
 			<div class="layui-inline">
 				<a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn">批量删除</a>
 			</div>
 		</form>
 	</blockquote>
-	<table id="userList" lay-filter="userList"></table>
+	<table id="roleList" lay-filter="roleList"></table>
 
 	<!--操作-->
-	<script type="text/html" id="userListBar">
+	<script type="text/html" id="roleListBar">
 		<a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
 		<a class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del">删除</a>
 	</script>
 </form>
 	<script th:src="@{/layui/layui.all.js}"></script>
 	<script th:src="@{/js/formSelects-v4.js}"></script>
-	<script th:src="@{/js/user/userList.js}"></script>
+	<script th:src="@{/js/role/roleList.js}"></script>
 	
 </body>
 </html>

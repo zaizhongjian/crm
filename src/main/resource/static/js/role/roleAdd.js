@@ -3,29 +3,22 @@ layui.use([ 'form', 'layer'], function() {
 	var formSelects = layui.formSelects;
 	layer = parent.layer === undefined ? layui.layer : top.layer,
 	$ = layui.jquery;
-	form.on("submit(addUser)", function(data) {
-		if($("#password1").val()!==$("#password2").val()){
-			layer.msg("两次密码不正确!!!");
-			return false;
-		}
+	form.on("submit(addRole)", function(data) {
 		//弹出loading
 		var index = top.layer.msg('数据提交中，请稍候', {
 			icon : 16,
 			time : false,
 			shade : 0.8
 		});
-		console.log( $("#userId").val()=="")
 		// 实际使用时的提交信息
-		$.post("/user/insertOrUpdate", {
-			userId : $("#userId").val()==""?-1:$("#userId").val(),
-			username : $(".userName").val(), //登录名
-			roleIds1:formSelects.value('roleSelect', 'val'),
+		$.post("/role/insertOrUpdate", {
+			roleId : $("#roleId").val(),
+			roleName : $(".roleName").val(), //登录名
+			menuIds:formSelects.value('menuSelect', 'val'),
 //			password1:$("#password1").val(),
 //			password2:$("#password2").val(),
-			email : $(".userEmail").val(), //邮箱
-			mobile : $("#userPhone").val(), //邮箱
-			sex : data.field.sex, //性别
-			status : data.field.userStatus, //用户状态
+			remark : $("#remark").val(), //邮箱
+			deptId : $("#deptId").val(), //邮箱
 		}, function(res) {
 			
 		})

@@ -1,5 +1,6 @@
 package cn.jsonXxxx.jyTest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -9,8 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+
 import cn.jsonXxxx.jyTest.entity.Menu;
 import cn.jsonXxxx.jyTest.entity.Result;
+import cn.jsonXxxx.jyTest.entity.Role;
+import cn.jsonXxxx.jyTest.entity.SelectData;
+import cn.jsonXxxx.jyTest.entity.SelectList;
 import cn.jsonXxxx.jyTest.service.IMenuService;
 
 /**
@@ -38,6 +44,33 @@ public class MenuController<E> {
 		menuList = menuList.stream().filter(menu -> Objects.nonNull(menu)).collect(Collectors.toList());
 		// 拿到子菜单，判断url是否为空
 		return Result.SUCCESS().addContentManagement(menuList);
+	}
+
+	@RequestMapping("/selectList")
+	public SelectList selectList() {
+		SelectList selectList = new SelectList();
+		List<SelectData> selectDateList = new ArrayList<SelectData>();
+		List<Menu> list = null;
+		try {
+			list = service.list(new QueryWrapper<Menu>());
+			list.stream().forEach(menu -> {
+				SelectData selectData = new SelectData();
+				selectData.setName(menu.getTitle());
+				selectData.setValue(menu.getMenuId());
+				selectDateList.add(selectData);
+			});
+			selectList.setData(selectDateList);
+			selectList.setCode(0);
+			selectList.setMsg("success");
+			return selectList;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			selectList.setCode(1);
+			selectList.setData(null);
+			selectList.setMsg("操作失败");
+			return selectList;
+		}
 	}
 
 }

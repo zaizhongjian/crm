@@ -1,6 +1,7 @@
 package cn.jsonXxxx.jyTest.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.User;
+import cn.jsonXxxx.jyTest.entity.UserRole;
 import cn.jsonXxxx.jyTest.mapper.UserMapper;
+import cn.jsonXxxx.jyTest.mapper.UserRoleMapper;
 import cn.jsonXxxx.jyTest.query.BaseQuery;
 import cn.jsonXxxx.jyTest.service.IUserService;
 
@@ -30,6 +33,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
 	@Autowired
 	private UserMapper mapper;
+
+	@Autowired
+	private UserRoleMapper userRoleMapper;
 
 	@Override
 	public User getByUsername(String username) {
@@ -52,6 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 			queryWrapper.like("user_id", key).or().like("username", key).or().like("email", key).or().like("mobile",
 					key);
 		}
+
 		try {
 			selectPage = mapper.selectPage(page, queryWrapper);
 			pageList.setCode(0L);
@@ -59,7 +66,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 			e.printStackTrace();
 			pageList.setMsg("操作失败");
 		}
-		pageList.setData(selectPage.getRecords());
+		List<User> records = selectPage.getRecords();
+		records.stream().forEach(user -> {
+			List<UserRole> selectList = userRoleMapper
+					.selectList(new QueryWrapper<UserRole>().eq("user_id", user.getUserId()));
+			user.setRoleIds(selectList.stream().map(userRole -> userRole.getRoleId()).collect(Collectors.toList()));
+		});
+		pageList.setData(records);
 		pageList.setCount(selectPage.getTotal());
 		return pageList;
 	}

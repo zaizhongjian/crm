@@ -15,50 +15,54 @@ import com.baomidou.mybatisplus.annotation.TableId;
  */
 public class RoleMenu implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-    /**
-     * 角色ID
-     */
-    private Long roleId;
-    /**
-     * 菜单ID
-     */
-    private Long menuId;
+	@TableId(value = "id", type = IdType.AUTO)
+	private Long id;
+	/**
+	 * 角色ID
+	 */
+	private Long roleId;
+	/**
+	 * 菜单ID
+	 */
+	private Long menuId;
 
+	public RoleMenu() {
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public RoleMenu(Long roleId, Long menuId) {
+		super();
+		this.roleId = roleId;
+		this.menuId = menuId;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getRoleId() {
-        return roleId;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
+	public Long getRoleId() {
+		return roleId;
+	}
 
-    public Long getMenuId() {
-        return menuId;
-    }
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
-    }
+	public Long getMenuId() {
+		return menuId;
+	}
 
-    @Override
-    public String toString() {
-        return "RoleMenu{" +
-        ", id=" + id +
-        ", roleId=" + roleId +
-        ", menuId=" + menuId +
-        "}";
-    }
+	public void setMenuId(Long menuId) {
+		this.menuId = menuId;
+	}
+
+	@Override
+	public String toString() {
+		return "RoleMenu{" + ", id=" + id + ", roleId=" + roleId + ", menuId=" + menuId + "}";
+	}
 }

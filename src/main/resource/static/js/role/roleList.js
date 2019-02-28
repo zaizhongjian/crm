@@ -7,14 +7,14 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 
 	//用户列表
 	var tableIns = table.render({
-		elem : '#userList',
-		url : '/user/list',
+		elem : '#roleList',
+		url : '/role/list',
 		cellMinWidth : 95,
 		page : true,
 		height : "full-125",
 		limits : [ 10, 15, 20, 25 ],
 		limit : 10,
-		id : "userListTable",
+		id : "roleListTable",
 		cols : [ [
 			{
 				type : "checkbox",
@@ -22,68 +22,42 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 				width : 50
 			},
 			{
-				field : 'userId',
-				title : '用户id',
+				field : 'roleId',
+				title : '角色id',
 				width : 70,
 				align : "center"
 			},
 			{
-				field : 'username',
-				title : '用户名',
+				field : 'roleName',
+				title : '角色名称',
 				minWidth : 100,
 				align : "center"
 			},
 			{
-				field : 'email',
-				title : '用户邮箱',
+				field : 'remark',
+				title : '备注',
 				minWidth : 200,
 				align : 'center',
 				templet : function(d) {
-					return '<a class="layui-blue" href="mailto:' + d.email + '">' + d.email + '</a>';
+					if (d.remark == "" || d.remark == null) {
+						return "~";
+					} else {
+						return d.remark;
+					}
 				}
 			},
 			{
-				field : 'mobile',
-				title : '手机号码',
+				field : 'deptId',
+				title : '部门id',
 				minWidth : 100,
 				align : "center"
 			},
-			{
-				field : 'status',
-				title : '用户状态',
-				align : 'center',
-				templet : function(d) {
-					return d.status == "1" ? "<span style='color:green'>正常使用<span>" : "<span style='color:red'>限制使用<span>";
-				}
-			},
-			{
-				field : 'status',
-				title : '性别',
-				align : 'center',
-				maxWidth : 70,
-				templet : function(d) {
-					return d.status == "1" ? "男" : "女";
-				}
-			},
-			{
-				field : 'roleIds',
-				title : '角色id',
-				align : 'center',
-				maxWidth : 70,
-			},
-			/*  {field: 'userGrade', title: '用户等级', align:'center',templet:function(d){
-			      if(d.userGrade == "0"){
-			          return "注册会员";
-			      }else if(d.userGrade == "1"){
-			          return "中级会员";
-			      }else if(d.userGrade == "2"){
-			          return "高级会员";
-			      }else if(d.userGrade == "3"){
-			          return "钻石会员";
-			      }else if(d.userGrade == "4"){
-			          return "超级会员";
-			      }
-			  }},*/
+			//			{
+			//				field : 'roleIds',
+			//				title : '角色id',
+			//				align : 'center',
+			//				maxWidth : 70,
+			//			},
 			{
 				field : 'createTime',
 				title : '创建时间',
@@ -93,20 +67,20 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 			{
 				title : '操作',
 				minWidth : 175,
-				templet : '#userListBar',
+				templet : '#roleListBar',
 				fixed : "right",
 				align : "center"
 			}
 		] ],
-		done : function() {
-			$("[data-field='roleIds']").css('display', 'none');
-		}
+	//		done : function() {
+	//			$("[data-field='roleIds']").css('display', 'none');
+	//		}
 	});
 
 	//搜索【此功能需要后台配合，所以暂时没有动态效果演示】
 	$(".search_btn").on("click", function() {
 		//如果关键字为空，那就查询出所有数据
-		table.reload("userListTable", {
+		table.reload("roleListTable", {
 			page : {
 				curr : 1 //重新从第 1 页开始
 			},
@@ -119,21 +93,19 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 	//添加用户
 	function addUser(edit) {
 		var index = layui.layer.open({
-			title : "添加用户",
+			title : "添加角色",
 			type : 2,
-			content : "/index/toUserAdd",
+			content : "/index/toRoleAdd",
 			success : function(layero, index) {
 				var formSelects = layui.formSelects;
 				var body = layui.layer.getChildFrame('body', index);
 				if (edit) {
-					body.find(".userName").val(edit.username); //登录名
 					//body.find("#password1").val(edit.password);  //登录名
 					//body.find("#password2").val(edit.password);  //登录名
-					body.find(".userEmail").val(edit.email); //邮箱
-					body.find("#userPhone").val(edit.mobile); //邮箱
-					body.find(".userSex input[value=" + edit.sex + "]").prop("checked", "checked"); //性别
-					body.find(".userStatus").val(edit.status); //用户状态
-					body.find("#userId").val(edit.userId);
+					body.find(".roleName").val(edit.roleName); //邮箱
+					body.find("#remark").val(edit.remark); //邮箱
+					body.find("#deptId").val(edit.deptId); //用户状态
+					body.find("#roleId").val(edit.roleId);
 					form.render();
 				}
 				setTimeout(function() {
@@ -156,19 +128,19 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 
 	//批量删除
 	$(".delAll_btn").click(function() {
-		var checkStatus = table.checkStatus('userListTable'),
-			data = checkStatus.data,
-			userId = [];
+		var checkStatus = table.checkStatus('roleListTable'),
+			data = checkStatus.data;
+		roleId = [];
 		if (data.length > 0) {
 			for (var i in data) {
-				userId.push(data[i].userId);
+				roleId.push(data[i].roleId);
 			}
 			layer.confirm('确定删除选中的用户？', {
 				icon : 3,
 				title : '提示信息'
 			}, function(index) {
-				$.post("/user/deleteAll", {
-					"userIds" : userId,
+				$.post("/role/deleteAll", {
+					roleIds : roleId,
 				}, function(data) {
 					if (data.code == 0) {
 						layer.alert("删除成功");
@@ -186,7 +158,7 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 	})
 
 	//列表操作
-	table.on('tool(userList)', function(obj) {
+	table.on('tool(roleList)', function(obj) {
 		var layEvent = obj.event,
 			data = obj.data;
 
@@ -217,8 +189,8 @@ layui.use([ 'form', 'layer', 'table', 'laytpl' ], function() {
 				icon : 3,
 				title : '提示信息'
 			}, function(index) {
-				$.get("/user/delete", {
-					userId : data.userId //将需要删除的newsId作为参数传入
+				$.get("/role/deleteOne", {
+					roleId : data.roleId //将需要删除的newsId作为参数传入
 				}, function(data) {
 					if (data.code == 0) {
 						layer.alert("删除成功");

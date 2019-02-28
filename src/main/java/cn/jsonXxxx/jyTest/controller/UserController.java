@@ -2,6 +2,7 @@ package cn.jsonXxxx.jyTest.controller;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 
 import cn.jsonXxxx.jyTest.entity.PageList;
 import cn.jsonXxxx.jyTest.entity.Result;
@@ -50,7 +53,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/insertOrUpdate")
-	public Result insertOrUpdate(User user, @RequestParam(name = "roleIds[]") Long roleIds[]) {
+	public Result insertOrUpdate(User user, @RequestParam(name = "roleIds1[]") Long roleIds[]) {
 		// 判断用户主题是否为空
 		if (Objects.isNull(user)) {
 			return Result.ERROR().addMsg("用户验证不通过");
@@ -75,26 +78,17 @@ public class UserController {
 		if (null == userId) {
 			return Result.ERROR().addMsg("用户id不能为空");
 		}
-		try {
-			service.removeById(userId);
-			return Result.SUCCESS();
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("UserController-->insertOrUpdate()" + e.getMessage(), e);
-			return Result.ERROR().addMsg("操作失败");
-		}
+		return userAndRoleService.removeUserAndRole(userId);
+
 	}
 
 	@PostMapping("/deleteAll")
 	public Result deleteAll(@RequestParam(name = "userIds[]") Long[] userIds) {
-		try {
-			service.removeByIds(Arrays.asList(userIds));
-			return Result.SUCCESS();
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("UserController-->deleteAll" + e.getMessage(), e);
-			return Result.ERROR();
+		List<Long> asList = Arrays.asList(userIds);
+		if (CollectionUtils.isEmpty(asList)) {
+			return Result.ERROR().addMsg("id数值不能为空");
 		}
+		return userAndRoleService.removeAllUserAndRole(asList);
 	}
 
 }
