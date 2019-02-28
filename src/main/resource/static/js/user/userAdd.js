@@ -17,7 +17,7 @@ layui.use([ 'form', 'layer'], function() {
 		console.log( $("#userId").val()=="")
 		// 实际使用时的提交信息
 		$.post("/user/insertOrUpdate", {
-			userId : $("#userId").val()==""?-1:$("#userId").val(),
+			userId : $("#userId").val(),
 			username : $(".userName").val(), //登录名
 			roleIds1:formSelects.value('roleSelect', 'val'),
 //			password1:$("#password1").val(),
