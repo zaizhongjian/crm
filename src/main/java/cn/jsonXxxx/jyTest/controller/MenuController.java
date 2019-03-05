@@ -24,53 +24,53 @@ import cn.jsonXxxx.jyTest.service.IMenuService;
  * 菜单管理 前端控制器
  * </p>
  *
- * @author jsonXxxx
  * @param <E>
+ * @author jsonXxxx
  * @since 2019-02-21
  */
 @RestController
 @RequestMapping("/menu")
 public class MenuController<E> {
-	@Autowired
-	private IMenuService service;
+    @Autowired
+    private IMenuService service;
 
-	@RequestMapping("/findByUsername")
-	public Result findByUsername() {
-		// 从shiro中获取认证的主题（username）
-		String principal = (String) SecurityUtils.getSubject().getPrincipal();
-		// 获取该用户所有的menu
-		List<Menu> menuList = service.findMenuByUsername(principal);
-		// 遍历父菜单，过滤所有为空的对象
-		menuList = menuList.stream().filter(menu -> Objects.nonNull(menu)).collect(Collectors.toList());
-		// 拿到子菜单，判断url是否为空
-		return Result.SUCCESS().addContentManagement(menuList);
-	}
+    @RequestMapping("/findByUsername")
+    public Result findByUsername() {
+        // 从shiro中获取认证的主题（username）
+        String principal = (String) SecurityUtils.getSubject().getPrincipal();
+        // 获取该用户所有的menu
+        List<Menu> menuList = service.findMenuByUsername(principal);
+        // 遍历父菜单，过滤所有为空的对象
+        menuList = menuList.stream().filter(menu -> Objects.nonNull(menu)).collect(Collectors.toList());
+        // 拿到子菜单，判断url是否为空
+        return Result.SUCCESS().addContentManagement(menuList);
+    }
 
-	@RequestMapping("/selectList")
-	public SelectList selectList() {
-		SelectList selectList = new SelectList();
-		List<SelectData> selectDateList = new ArrayList<SelectData>();
-		List<Menu> list = null;
-		try {
-			list = service.list(new QueryWrapper<Menu>());
-			list.stream().forEach(menu -> {
-				SelectData selectData = new SelectData();
-				selectData.setName(menu.getTitle());
-				selectData.setValue(menu.getMenuId());
-				selectDateList.add(selectData);
-			});
-			selectList.setData(selectDateList);
-			selectList.setCode(0);
-			selectList.setMsg("success");
-			return selectList;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			selectList.setCode(1);
-			selectList.setData(null);
-			selectList.setMsg("操作失败");
-			return selectList;
-		}
-	}
+    @RequestMapping("/selectList")
+    public SelectList selectList() {
+        SelectList selectList = new SelectList();
+        List<SelectData> selectDateList = new ArrayList<SelectData>();
+        List<Menu> list = null;
+        try {
+            list = service.list(new QueryWrapper<Menu>());
+            list.stream().forEach(menu -> {
+                SelectData selectData = new SelectData();
+                selectData.setName(menu.getTitle());
+                selectData.setValue(menu.getMenuId());
+                selectDateList.add(selectData);
+            });
+            selectList.setData(selectDateList);
+            selectList.setCode(0);
+            selectList.setMsg("success");
+            return selectList;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            selectList.setCode(1);
+            selectList.setData(null);
+            selectList.setMsg("操作失败");
+            return selectList;
+        }
+    }
 
 }
