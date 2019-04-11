@@ -57,7 +57,6 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/mybatis/mybatis/3.4.6/mybatis-3.4.6.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/baomidou/mybatis-plus-generator/3.0.2/mybatis-plus-generator-3.0.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/velocity/velocity-engine-core/2.0/velocity-engine-core-2.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/freemarker/freemarker/2.3.28/freemarker-2.3.28.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/shiro/shiro-spring/1.4.0/shiro-spring-1.4.0.jar" enabled="true" runInBatchMode="false"/>
@@ -73,5 +72,7 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.2.RELEASE/thymeleaf-extras-java8time-3.0.2.RELEASE.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/json/json/20180813/json-20180813.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="D:\workspace\crm\lib\java-json.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
